@@ -17,3 +17,14 @@ function isUrl(url) {
     return false;
   }
 }
+
+export function isConfigured() {
+  return (
+    import.meta.env.VITE_VISION_KEY &&
+    import.meta.env.VITE_VISION_KEY !== '' &&
+    import.meta.env.VITE_VISION_ENDPOINT &&
+    import.meta.env.VITE_VISION_ENDPOINT !== '' &&
+    import.meta.env.VITE_SD_API_KEY &&
+    import.meta.env.VITE_SD_API_KEY !== ''
+  )
+}

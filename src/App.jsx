@@ -1,13 +1,16 @@
 import { useState } from "react"
 import { analyzeImage } from "./services/azure-image-analysis"
-import { validateField } from "./helpers"
+import { generateImage } from "./services/sd-image-generation"
+import { validateField, isConfigured } from "./helpers"
 import { Analyze } from "./components/Analyze"
+import { ImageResult } from "./components/ImageResult"
 
 function App() {
   const [analyzeButtonText, setAnalyzeButtontext] = useState('Analizar')
   const [generateButtonText, setGenerateButtonText] = useState('Generar')
   const [fieldError, setFieldError] = useState(null)
   const [result, setResult] = useState(null)
+  const [imageGenerated, setImageGenerated] = useState([])
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -24,6 +27,27 @@ function App() {
       setResult(result)
       setAnalyzeButtontext('Analizar')
     }
+
+    if (event.nativeEvent.submitter.name === 'generate') {
+      setGenerateButtonText('Generando...')
+      const image = await generateImage(inputText)
+      setImageGenerated(image)
+      setGenerateButtonText('Generar')
+    }
+  }
+
+  if (!isConfigured()) {
+    return (
+      <div className="text-center py-8 max-w-3xl mx-auto flex flex-col justify-center place-content-center">
+        <header>
+          <h1 className="text-5xl mb-6">Analisa y Genera Imágenes</h1>
+        </header>
+        <main>
+          <p>Para poder usar esta aplicación es necesario configurar las variables de entorno.</p>
+          <p>Por favor, revisa el archivo <code>.env.example</code> y configura las variables de entorno.</p>
+        </main>
+      </div>
+    )
   }
 
   return (
@@ -58,7 +82,6 @@ function App() {
               name="generate"
               type="submit"
               className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              disabled
             >
               {generateButtonText}
             </button>
@@ -68,6 +91,7 @@ function App() {
 
       <main>
         <Analyze data={result} />
+        <ImageResult imageGenerated={imageGenerated} />
       </main>
     </div>
   )
