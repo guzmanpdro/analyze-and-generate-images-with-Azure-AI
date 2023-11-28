@@ -23,9 +23,9 @@ jobs:
           # Añadir paso para configurar variables de entorno
       - name: Set up Environment Variables
         run: |
-          echo "VISION_ENDPOINT=${{ secrets.VISION_ENDPOINT }}" >> $GITHUB_ENV
-          echo "VISION_KEY=${{ secrets.VISION_KEY }}" >> $GITHUB_ENV
-          echo "SD_API_KEY=${{ secrets.SD_API_KEY }}" >> $GITHUB_ENV
+          echo "VITE_VISION_ENDPOINT=${{ secrets.VISION_ENDPOINT }}" >> .env
+          echo "VITE_VISION_KEY=${{ secrets.VISION_KEY }}" >> .env
+          echo "VITE_SD_API_KEY=${{ secrets.SD_API_KEY }}" >> .env
 
       - name: Build And Deploy
         id: builddeploy
