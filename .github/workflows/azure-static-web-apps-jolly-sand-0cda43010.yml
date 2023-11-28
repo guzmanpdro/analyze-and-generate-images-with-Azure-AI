@@ -19,14 +19,14 @@ jobs:
         with:
           submodules: true
           lfs: false
-          
+
           # Añadir paso para configurar variables de entorno
-          name: Set up Environment Variables
-          run: |
-            echo "AZURE_AI_ENDPOINT=${{ secrets.VISION_ENDPOINT }}" >> $GITHUB_ENV
-            echo "AZURE_AI_KEY=${{ secrets.VISION_KEY }}" >> $GITHUB_ENV
-            echo "STABLE_DIFFUSION_API_KEY=${{ secrets.SD_API_KEY }}" >> $GITHUB_ENV
-            
+      - name: Set up Environment Variables
+        run: |
+          echo "AZURE_AI_ENDPOINT=${{ secrets.VISION_ENDPOINT }}" >> $GITHUB_ENV
+          echo "AZURE_AI_KEY=${{ secrets.VISION_KEY }}" >> $GITHUB_ENV
+          echo "STABLE_DIFFUSION_API_KEY=${{ secrets.SD_API_KEY }}" >> $GITHUB_ENV
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
