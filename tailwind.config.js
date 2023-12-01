@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'appBgImage': "url('/src/assets/layered-waves-haikei.svg')"
+      }
+    },
   },
   plugins: [],
 }

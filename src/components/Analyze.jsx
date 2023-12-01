@@ -10,14 +10,14 @@ export function Analyze({ data }) {
   }
 
   return thereIsData(data) && (
-    <section className="mt-8">
+    <section>
       <figure>
         <img
           src={data.url}
           alt={data.captionResult.text}
-          className="max-w-xs h-auto mx-auto"
+          className="max-w-xs h-auto mx-auto mb-3 rounded-lg"
         />
-        <figcaption className="text-center">
+        <figcaption className="text-center font-bold">
           <p className="uppercase text-lg">
             {data.captionResult.text}
           </p>
